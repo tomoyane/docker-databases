@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  mongo_db_01:
+    container_name: mongodb01
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db", "--enableMajorityReadConcern", "true"]
+  mongo_db_02:
+    container_name: mongodb02
+    image: mongo
+    expose:
+      - 27018
+    ports:
+      - 27018:27018
+    entrypoint: [ "/usr/bin/mongod", "--port", "27018", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db", "--enableMajorityReadConcern", "true"]
+  mongo_db_03:
+    container_name: mongodb03
+    image: mongo
+    expose:
+      - 27019
+    ports:
+      - 27019:27019
+    entrypoint: [ "/usr/bin/mongod", "--port", "27019", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db", "--enableMajorityReadConcern", "true"]
+

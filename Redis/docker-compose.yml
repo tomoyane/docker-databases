@@ -1,0 +1,37 @@
+version: "3.3"
+services:
+  redis_01:
+    image: redis
+    container_name: redis01
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./redis01.conf:/usr/local/etc/redis/redis.conf
+    expose:
+      - 7001
+    ports:
+      - "7001:7001"
+      - "17001:17001"
+
+  redis_02:
+    image: redis
+    container_name: redis02
+    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    volumes:
+      - ./redis02.conf:/usr/local/etc/redis/redis.conf
+    expose:
+      - 7002
+    ports:
+      - "7002:7002"
+      - "17002:17002"
+
+  redis_03:
+    image: redis
+    container_name: redis03
+    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    volumes:
+      - ./redis03.conf:/usr/local/etc/redis/redis.conf
+    expose:
+      - 7003
+    ports:
+      - "7003:7003"
+      - "17003:17003"
