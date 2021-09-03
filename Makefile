@@ -52,3 +52,28 @@ setup-redis-cluster:
 login-redis:
 	@echo "Login Redis"
 	@docker exec -it redis01 bash -c 'redis-cli -c -p 7001'
+
+
+# MySQL
+build-mysql:
+	@echo "Build MySQL"
+	@docker-compose -f MySQL/docker-compose.yml build --no-cache
+
+up-mysql:
+	@echo "Up MySQL"
+	@docker-compose -f MySQL/docker-compose.yml up -d
+	@docker ps -a
+
+down-mysql:
+	@echo "Down MySQL"
+	@docker-compose -f MySQL/docker-compose.yml down
+
+restart-mysql:
+	@echo "Restart MySQL cluster"
+	make -s down-mysql
+	make -s up-mysql
+
+login-mysql:
+	@echo "Setup MySQL"
+	@docker exec -it mysql01 bash -c 'mysql -u user --password=password'
+
