@@ -69,7 +69,7 @@ down-mysql:
 	@docker-compose -f MySQL/docker-compose.yml down
 
 restart-mysql:
-	@echo "Restart MySQL cluster"
+	@echo "Restart MySQL"
 	make -s down-mysql
 	make -s up-mysql
 
@@ -77,3 +77,51 @@ login-mysql:
 	@echo "Setup MySQL"
 	@docker exec -it mysql01 bash -c 'mysql -u user --password=password'
 
+
+# PostgreSQL
+build-postgres:
+	@echo "Build PostgreSQL"
+	@docker-compose -f PostgreSQL/docker-compose.yml build --no-cache
+
+up-postgres:
+	@echo "Up PostgreSQL"
+	@docker-compose -f PostgreSQL/docker-compose.yml up -d
+	@docker ps -a
+
+down-postgres:
+	@echo "Down PostgreSQL"
+	@docker-compose -f PostgreSQL/docker-compose.yml down
+
+restart-postgres:
+	@echo "Restart PostgreSQL"
+	make -s down-postgres
+	make -s up-postgres
+
+login-postgres:
+	@echo "Setup PostgreSQL"
+	@docker exec -it postgresql01 bash -c 'psql -U user'
+
+
+# Cassandra
+build-cassandra:
+	@echo "Build Cassandra"
+	@docker-compose -f Cassandra/docker-compose.yml build --no-cache
+
+up-cassandra:
+	@echo "Up Cassandra"
+	@docker-compose -f Cassandra/docker-compose.yml up -d
+	@docker ps -a
+	sh ./Cassandra/check_cluster_status.sh
+
+down-cassandra:
+	@echo "Down Cassandra"
+	@docker-compose -f Cassandra/docker-compose.yml down
+
+restart-cassandra:
+	@echo "Restart Cassandra"
+	make -s down-cassandra
+	make -s up-cassandra
+
+login-cassandra:
+	@echo "Setup Cassandra"
+	@docker exec -it cassandra01 bash -c 'cqlsh $HOSTNAME'

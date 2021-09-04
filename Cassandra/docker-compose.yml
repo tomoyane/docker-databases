@@ -1,0 +1,54 @@
+version: "3.3"
+services:
+  cassandra_01:
+    container_name: cassandra01
+    image: cassandra
+    ports:
+      - 9042:9042
+    volumes:
+      - ./Cassandra/data01:/var/lib/cassandra
+    environment:
+      CASSANDRA_SEEDS: cassandra_01
+      CASSANDRA_CLUSTER_NAME: "TestCluster"
+      CASSANDRA_ENDPOINT_SNITCH: "GossipingPropertyFileSnitch"
+      CASSANDRA_DC: dc01
+      CASSANDRA_RACK: rack01
+      CASSANDRA_LISTEN_ADDRESS: cassandra_01
+    mem_limit: 2g
+    restart: always
+  cassandra_02:
+    container_name: cassandra02
+    image: cassandra
+    ports:
+      - 9043:9042
+    volumes:
+      - ./Cassandra/data02:/var/lib/cassandra
+    environment:
+      CASSANDRA_SEEDS: cassandra_01
+      CASSANDRA_ENDPOINT_SNITCH: "GossipingPropertyFileSnitch"
+      CASSANDRA_CLUSTER_NAME: "TestCluster"
+      CASSANDRA_DC: dc01
+      CASSANDRA_RACK: rack01
+      CASSANDRA_LISTEN_ADDRESS: cassandra_02
+    depends_on:
+      - cassandra_01
+    mem_limit: 2g
+    restart: always
+  cassandra_03:
+    container_name: cassandra03
+    image: cassandra
+    ports:
+      - 9044:9042
+    volumes:
+      - ./Cassandra/data03:/var/lib/cassandra
+    environment:
+      CASSANDRA_SEEDS: cassandra_01
+      CASSANDRA_CLUSTER_NAME: "TestCluster"
+      CASSANDRA_ENDPOINT_SNITCH: "GossipingPropertyFileSnitch"
+      CASSANDRA_DC: dc01
+      CASSANDRA_RACK: rack01
+      CASSANDRA_LISTEN_ADDRESS: cassandra_03
+    depends_on:
+      - cassandra_01
+    mem_limit: 2g
+    restart: always
