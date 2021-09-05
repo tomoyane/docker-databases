@@ -149,3 +149,27 @@ restart-couchdb:
 check-couchdb:
 	@echo "Setup CouchDB"
 	curl http://127.0.0.1:5984/
+
+
+# InfluxDB
+build-influxdb:
+	@echo "Build InfluxDB"
+	@docker-compose -f InfluxDB/docker-compose.yml build --no-cache
+
+up-influxdb:
+	@echo "Up InfluxDB"
+	@docker-compose -f InfluxDB/docker-compose.yml up -d
+	@docker ps -a
+
+down-influxdb:
+	@echo "Down InfluxDB"
+	@docker-compose -f InfluxDB/docker-compose.yml down
+
+restart-influxdb:
+	@echo "Restart InfluxDB"
+	make -s down-influxdb
+	make -s up-influxdb
+
+login-influxdb:
+	@echo "Setup InfluxDB"
+	@docker exec -it influxdb01 bash -c 'influx'
