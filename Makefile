@@ -173,3 +173,30 @@ restart-influxdb:
 login-influxdb:
 	@echo "Setup InfluxDB"
 	@docker exec -it influxdb01 bash -c 'influx'
+
+
+# Neo4j
+build-neo4j:
+	@echo "Build Neo4j"
+	@docker-compose -f Neo4j/docker-compose.yml build --no-cache
+
+up-neo4j:
+	@echo "Up Neo4j"
+	@docker-compose -f Neo4j/docker-compose.yml up -d
+	@docker ps -a
+	@docker exec -it neo4j01 bash -c 'neo4j start'
+
+down-neo4j:
+	@echo "Down Neo4j"
+	@docker-compose -f Neo4j/docker-compose.yml down
+
+restart-neo4j:
+	@echo "Restart Neo4j"
+	make -s down-neo4j
+	make -s up-neo4j
+
+check-neo4j:
+	@echo "Check Neo4j"
+	sh ./Neo4j/check_neo4j.sh
+
+

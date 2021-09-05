@@ -5,3 +5,5 @@ Cassandra/Cassandra/data03/
 PostgreSQL/data/
 CouchDB/dbdata/
 InfluxDB/influxdb/
+Neo4j/neo4j_data/
+Neo4j/neo4j_log/

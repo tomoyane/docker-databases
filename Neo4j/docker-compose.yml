@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  neo4j_01:
+    platform: linux/x86_64
+    container_name: neo4j01
+    image: neo4j
+    environment:
+      NEO4J_AUTH: none
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./neo4j_data:/data
+      - ./neo4j_log:/logs
+      - ./neo4j_import:/var/lib/neo4j/import
+      - ./neo4j_plugins:/plugins
+
+
