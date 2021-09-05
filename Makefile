@@ -125,3 +125,27 @@ restart-cassandra:
 login-cassandra:
 	@echo "Setup Cassandra"
 	@docker exec -it cassandra01 bash -c 'cqlsh $HOSTNAME'
+
+
+# CouchDB
+build-couchdb:
+	@echo "Build CouchDB"
+	@docker-compose -f CouchDB/docker-compose.yml build --no-cache
+
+up-couchdb:
+	@echo "Up CouchDB"
+	@docker-compose -f CouchDB/docker-compose.yml up -d
+	@docker ps -a
+
+down-couchdb:
+	@echo "Down CouchDB"
+	@docker-compose -f CouchDB/docker-compose.yml down
+
+restart-couchdb:
+	@echo "Restart CouchDB"
+	make -s down-couchdb
+	make -s up-couchdb
+
+check-couchdb:
+	@echo "Setup CouchDB"
+	curl http://127.0.0.1:5984/
