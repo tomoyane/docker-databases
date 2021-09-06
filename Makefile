@@ -200,3 +200,22 @@ check-neo4j:
 	sh ./Neo4j/check_neo4j.sh
 
 
+# etcd
+build-etcd:
+	@echo "Build etcd"
+	@docker-compose -f etcd/docker-compose.yml build --no-cache
+
+up-etcd:
+	@echo "Up etcd"
+	@docker-compose -f etcd/docker-compose.yml up -d
+	@docker ps -a
+
+down-etcd:
+	@echo "Down etcd"
+	@docker-compose -f etcd/docker-compose.yml down
+
+restart-etcd:
+	@echo "Restart etcd"
+	make -s down-etcd
+	make -s up-etcd
+

@@ -7,3 +7,4 @@ CouchDB/dbdata/
 InfluxDB/influxdb/
 Neo4j/neo4j_data/
 Neo4j/neo4j_log/
+etcd/etcd/
