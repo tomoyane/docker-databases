@@ -3,7 +3,7 @@
 
 Vefirication database for use `RDBMS` and `NoSQL` and `Graph` and `Time Series Data`
 
-* RDMBMS
+* RDBMS
   * MySQL
   * PosgreSQL
 * NoSQL
@@ -105,7 +105,7 @@ $ make restart-mongodb
 $ make down-mongodb
 
 # Setup MongoDB cluster
-$ setup-mongodb-cluster
+$ make setup-mongodb-cluster
 
 # Login MongoDB container
 $ make login-mongodb
