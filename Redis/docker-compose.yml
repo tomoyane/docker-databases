@@ -3,7 +3,12 @@ services:
   redis_01:
     image: redis
     container_name: redis01
-    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    command:
+      - /bin/bash
+      - -c
+      - |
+        sleep 5
+        redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - ./redis01.conf:/usr/local/etc/redis/redis.conf
     expose:
@@ -15,7 +20,12 @@ services:
   redis_02:
     image: redis
     container_name: redis02
-    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    command:
+      - /bin/bash
+      - -c
+      - |
+        sleep 5
+        redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - ./redis02.conf:/usr/local/etc/redis/redis.conf
     expose:
@@ -27,7 +37,12 @@ services:
   redis_03:
     image: redis
     container_name: redis03
-    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    command:
+      - /bin/bash
+      - -c
+      - |
+        sleep 5
+        redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - ./redis03.conf:/usr/local/etc/redis/redis.conf
     expose:
